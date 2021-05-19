@@ -13,4 +13,41 @@ sudo systemctl daemon-reload
 sudo systemctl start jenkins
 sudo systemctl status jenkins
 ```
-3. Install Docker pipeline plugin and other common plugins
+3. Install "Docker pipeline" plugin and other common plugins
+
+4. Install docker and add jenkins user to docker group
+
+```bash
+sudo yum install docker
+sudo service docker start
+sudo usermod -a -G docker jenkins
+sudo chkconfig docker on
+sudo reboot
+```
+5. Install nginx and setup nginx reverse proxy
+
+```bash
+sudo amazon-linux-extras install nginx1
+```
+/etc/nginx/nginx.conf
+```bash
+events {
+  worker_connections  4096;  ## Default: 1024
+}
+http {
+server {
+        listen   80;
+
+        location / {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $host;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://localhost:8080/;
+        }
+}
+}
+```
+```bash
+sudo systemctl restart nginx
+```
