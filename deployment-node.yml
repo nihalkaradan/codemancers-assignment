@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: codemancers-node-app
+  labels:
+    app: codemancers-node-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: codemancers-node-app
+  template:
+    metadata:
+      labels:
+        app: codemancers-node-app
+    spec:
+      containers:
+      - name: codemancers-node-app
+        image: nihalkaradan/codemancers-crud-app:1.0
+        env:
+          # Use secret in real usage
+        - name: HOST
+          value: mysql
+        - name: PASSWORD
+          value: password
+        ports:
+        - containerPort: 8080
