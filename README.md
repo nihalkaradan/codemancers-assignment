@@ -13,3 +13,4 @@ sudo systemctl daemon-reload
 sudo systemctl start jenkins
 sudo systemctl status jenkins
 ```
+3. Install Docker pipeline plugin and other common plugins
