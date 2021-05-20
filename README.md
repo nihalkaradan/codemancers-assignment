@@ -50,4 +50,19 @@ server {
 ```
 ```bash
 sudo systemctl restart nginx
+sudo systemctl enable nginx
 ```
+6. Install pip and ansible
+
+```bash
+yum install python python-devel python-pip openssl -y
+sudo amazon-linux-extras install ansible2
+```
+7. Install kubectl and aws cli
+
+```bash
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.20.4/2021-04-12/bin/linux/amd64/kubectl
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+```
+
