@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: codemancers-node-app
-        image: nihalkaradan/codemancers-crud-app:1.3
+        image: nihalkaradan/codemancers-crud-app:1.4
         env:
           # Use secret in real usage
         - name: HOST

@@ -65,6 +65,7 @@ curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.20.4/2021-04-12/
 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 ```
+
 8. Create ansible playbook playbook.yml
 
 ```bash
@@ -88,3 +89,54 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
       command: "kubectl create -f ./book-app/deployment-node.yml"
       ignore_errors: yes
 ```
+9. Spin up Kubernetes cluster with KOPS
+
+create s3 bucket to store state
+```bash 
+s3://kops-state-13
+```
+Install kops
+
+```bash
+curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+
+```
+Spin up cluster
+```bash
+ssh-keygen -f .ssh/id_rsa
+export KOPS_STATE_STORE=s3://kops-state-13
+kops create cluster mycluster.k8s.local --node-count=1 --node-size=t3.small --master-size=t3.small --zones ap-south-1a --yes
+```
+
+9. Create Jenkins pipeline
+```bash
+# Create webhook in github dashboard 
+https://github.com/nihalkaradan/codemancers-assignment
+```
+Create job
+
+```bash
+# create dockerhub credential 
+node {
+    def registryCredential = 'dockerhub_id'
+    stage('Preparation') { 
+        
+        git 'https://github.com/nihalkaradan/codemancers-assignment'
+        
+        
+    }
+    stage('Build and Publish'){
+        withDockerRegistry([ credentialsId: "${registryCredential}", url: "" ]) {
+            sh "docker build ./book-app -t nihalkaradan/codemancers-crud-app:1.4"
+            sh "docker push nihalkaradan/codemancers-crud-app:1.4"
+        }
+    }
+    stage('Deploy to K8s'){
+        sh "ansible-playbook playbook.yml  --user=jenkins "
+    }
+    
+}
+```
+
+
+

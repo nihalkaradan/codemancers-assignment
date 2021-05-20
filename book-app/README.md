@@ -1,4 +1,4 @@
-## Basic crud app with basic crud functionalities
+## Basic CRUD app with basic CRUD functionalities
 1. http://{url}/books GET
 2. http://{url}/books POST
 3. http://{url}/books/:id GET
