@@ -108,7 +108,7 @@ export KOPS_STATE_STORE=s3://kops-state-13
 kops create cluster mycluster.k8s.local --node-count=1 --node-size=t3.small --master-size=t3.small --zones ap-south-1a --yes
 ```
 
-9. Create Jenkins pipeline
+10. Create Jenkins pipeline
 ```bash
 # Create webhook in github dashboard 
 https://github.com/nihalkaradan/codemancers-assignment
