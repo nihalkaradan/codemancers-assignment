@@ -13,7 +13,7 @@ router.post("/", (req, res, next) => {
 
   con.query(sql, function (err, result) {
     if (err) throw err;
-    // console.log("1 record inserted");
+    console.log("record inserted");
     res.json({ result: "record inserted" });
   });
 });
@@ -23,6 +23,7 @@ router.patch("/:id", (req, res, next) => {
         if (err) throw err;
         let string = JSON.stringify(result);
         let json = JSON.parse(string);
+        console.log(json);
         res.json(json);
         // console.log(result);
       });
@@ -33,8 +34,9 @@ router.get("/", (req, res, next) => {
     if (err) throw err;
     let string = JSON.stringify(result);
     let json = JSON.parse(string);
+    console.log(json);
     res.json(json);
-    // console.log(result);
+    
   });
 });
 router.get("/:id", (req, res, next) => {
@@ -44,6 +46,7 @@ router.get("/:id", (req, res, next) => {
       if (err) throw err;
       let string = JSON.stringify(result);
       let json = JSON.parse(string);
+      console.log(json);
       res.json(json);
       // console.log(result);
     }
@@ -56,6 +59,7 @@ router.delete("/:id", (req, res, next) => {
           if (err) throw err;
           let string = JSON.stringify(result);
           let json = JSON.parse(string);
+          console.log(json);
           res.json(json);
           // console.log(result);
         }

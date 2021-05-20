@@ -65,4 +65,8 @@ curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.20.4/2021-04-12/
 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 ```
+8. Create ansible playbook playbook.yml
 
+```bash
+
+```

@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+    ImageName: ""
+    Namespace: ""
+    imageTag: ""
+  #remote_user: ansible
+  #become: true
+  gather_facts: no
+  connection: local
+  tasks:
+    - name: Create MYSQL configmap
+      command: "kubectl create -f ./mysql/mysql-config-map.yml"
+      ignore_errors: yes
+    - name: MYSQL service and Deployment 
+      command: "kubectl create -f ./mysql/mysql-deployment.yml"
+      ignore_errors: yes
+    - name: Books App service and Deployment 
+      command: "kubectl create -f ./book-app/deployment-node.yml"
+      ignore_errors: yes
