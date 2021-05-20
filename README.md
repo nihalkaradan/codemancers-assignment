@@ -68,5 +68,23 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 8. Create ansible playbook playbook.yml
 
 ```bash
-
+- hosts: localhost
+  vars:
+    ImageName: ""
+    Namespace: ""
+    imageTag: ""
+  #remote_user: ansible
+  #become: true
+  gather_facts: no
+  connection: local
+  tasks:
+    - name: Create MYSQL configmap
+      command: "kubectl create -f ./mysql/mysql-config-map.yml"
+      ignore_errors: yes
+    - name: MYSQL service and deployment 
+      command: "kubectl create -f ./mysql/mysql-deployment.yml"
+      ignore_errors: yes
+    - name: Books App service and deployment 
+      command: "kubectl create -f ./book-app/deployment-node.yml"
+      ignore_errors: yes
 ```
