@@ -106,6 +106,8 @@ Spin up cluster
 ssh-keygen -f .ssh/id_rsa
 export KOPS_STATE_STORE=s3://kops-state-13
 kops create cluster mycluster.k8s.local --node-count=1 --node-size=t3.small --master-size=t3.small --zones ap-south-1a --yes
+sudo cp .kube/config /var/lib/jenkins/.kube/config
+sudo chown jenkins /var/lib/jenkins/.kube/config
 ```
 
 10. Create Jenkins pipeline
