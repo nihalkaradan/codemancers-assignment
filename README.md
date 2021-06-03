@@ -1,5 +1,5 @@
 # codemancers-assignment
-1. Create EC2  instance
+1. Create EC2 instance
 
 2. Download and install jenkins
 ```bash
